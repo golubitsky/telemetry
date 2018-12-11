@@ -1,0 +1,17 @@
+version: '3'
+services:
+  statsd-client:
+    build: .
+    depends_on:
+      - statsd-server
+    volumes:
+      - .:/usr/src/app
+  statsd-server:
+    image: "hopsoft/graphite-statsd"
+    container_name: graphite
+    ports:
+      - "80:80"
+      - "2003-2004:2003-2004"
+      - "2023-2024:2023-2024"
+      - "8125:8125/udp"
+      - "8126:8126"
